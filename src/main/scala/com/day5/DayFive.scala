@@ -25,7 +25,7 @@ object DayFive extends App {
     binarySeatCodes.isEmpty match {
       case true => seatNumberTotals.sorted
       case false =>
-        boardingPassSeatNumberTotals(binarySeatCodes.drop(1),seatNumberTotals ++ List((getSeatNumber(binarySeatCodes(0))._1 * 8) + getSeatNumber(binarySeatCodes(0))._2))
+        boardingPassSeatNumberTotals(binarySeatCodes.drop(1),seatNumberTotals ++ List((getSeatNumber(binarySeatCodes.head)._1 * 8) + getSeatNumber(binarySeatCodes.head)._2))
     }
   }
 

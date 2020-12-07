@@ -12,13 +12,14 @@ object SecretSanta extends App {
       case 1 => results ++ List((giftBuyers(0), giftReceivers(0)))
       case _ =>
         val buyer: String = giftBuyers(scala.util.Random.nextInt(giftBuyers.size))
-        val receiverList = giftBuyers.filter(x => x != buyer)
-        val receiver: String = giftReceivers(scala.util.Random.nextInt(receiverList.size))
+        val receiverList = giftReceivers.filter(x => x != buyer)
+        val receiver: String = receiverList(scala.util.Random.nextInt(receiverList.size))
         pullName(giftBuyers.filter(x => x != buyer), giftReceivers.filter(x => x != receiver), results ++ List((buyer, receiver)))
     }
 
   }
 
-  pullName(entrantList, entrantList).foreach { case (buyer, receiver) => println(s"$buyer will gift a present to $receiver") }
+  pullName(entrantList, entrantList).foreach { case (buyer, receiver) => println(s"Hi $buyer, " +
+    s"you will gift a present to $receiver.") }
 
 }
