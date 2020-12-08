@@ -19,7 +19,6 @@ object SecretSanta extends App {
 
   }
 
-  pullName(entrantList, entrantList).foreach { case (buyer, receiver) => println(s"Hi $buyer, " +
-    s"you will gift a present to $receiver.") }
-
+  pullName(entrantList, entrantList).foreach { case (buyer, receiver) => println(s"Hi $buyer, \n" +
+    s"I'm struggling to think of a gift for $receiver this year (I'm surprised they're even on the list!). I'm trusting you to buy a gift for $receiver this year.\nThanks, \nSanta") }
 }
