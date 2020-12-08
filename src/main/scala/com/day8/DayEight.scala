@@ -8,15 +8,15 @@ object DayEight extends App {
 
   val instructionsList = videoGameInstructions.map(x => x.split(" ").toList)
 
-  def instructionParser(instructionList: List[List[String]], instruction: Int = 0, instructionsHit: List[Int] = List(), total: Int = 0): Unit = {
-    instruction match {
-      case x if (instruction <= (instructionList.size - 1)) =>
-        instructionList(instruction) match {
-        case x if instructionsHit.contains(instruction) => println(s"The broken total is $total")
+  def instructionParser(instructionList: List[List[String]], instructionPosition: Int = 0, instructionsHit: List[Int] = List(), total: Int = 0): Unit = {
+    instructionPosition match {
+      case x if (instructionPosition <= (instructionList.size - 1)) =>
+        instructionList(instructionPosition) match {
+        case x if instructionsHit.contains(instructionPosition) => println(s"The broken total is $total")
         case x => x.head match {
-          case "nop" => instructionParser (instructionList, instruction + 1, instructionsHit ++ List (instruction), total)
-          case "acc" => instructionParser (instructionList, instruction + 1, instructionsHit ++ List (instruction), total + x (1).toInt)
-          case "jmp" => instructionParser (instructionList, instruction + x (1).toInt, instructionsHit ++ List (instruction), total)
+          case "nop" => instructionParser (instructionList, instructionPosition + 1, instructionsHit ++ List (instructionPosition), total)
+          case "acc" => instructionParser (instructionList, instructionPosition + 1, instructionsHit ++ List (instructionPosition), total + x (1).toInt)
+          case "jmp" => instructionParser (instructionList, instructionPosition + x (1).toInt, instructionsHit ++ List (instructionPosition), total)
         }
     }
       case x if (x == instructionList.size) => println (s"The fixed total is $total")
@@ -24,17 +24,17 @@ object DayEight extends App {
     }
   }
 
-  def instructionSwitcher(instructionList: List[List[String]], instruction: Int = 0): Unit = {
-    instruction match {
-      case _ if (instruction < instructionList.size) => {
-        instructionList(instruction) match {
+  def instructionSwitcher(instructionList: List[List[String]], instructionChanged: Int = 0): Unit = {
+    instructionChanged match {
+      case _ if (instructionChanged < instructionList.size) => {
+        instructionList(instructionChanged) match {
           case x => x.head match {
-            case "nop" => instructionParser(instructionList.updated(instruction, List("jmp", instructionList(instruction)(1))))
-              instructionSwitcher(instructionList, instruction + 1)
-            case "jmp" => instructionParser(instructionList.updated(instruction, List("nop", instructionList(instruction)(1))))
-              instructionSwitcher(instructionList, instruction + 1)
+            case "nop" => instructionParser(instructionList.updated(instructionChanged, List("jmp", instructionList(instructionChanged)(1))))
+              instructionSwitcher(instructionList, instructionChanged + 1)
+            case "jmp" => instructionParser(instructionList.updated(instructionChanged, List("nop", instructionList(instructionChanged)(1))))
+              instructionSwitcher(instructionList, instructionChanged + 1)
             case "acc" =>
-              instructionSwitcher(instructionList, instruction + 1)
+              instructionSwitcher(instructionList, instructionChanged + 1)
           }
         }
       }
@@ -43,7 +43,7 @@ object DayEight extends App {
   }
 
   instructionParser(instructionsList)
-  instructionSwitcher(instructionsList, 0)
+  instructionSwitcher(instructionsList)
 
 
 }
