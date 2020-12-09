@@ -4,7 +4,7 @@ import scala.io.Source
 
 object DayOne {
 
-  def newPrint(numbers: Int, total: Int): Unit = {
+  def dayOne(numbers: Int, total: Int): Unit = {
 
     val listOne: Seq[Int] = Source.fromResource("dayone.txt").getLines.toList.map(s => s.toInt)
 
@@ -17,7 +17,7 @@ object DayOne {
 
   }
 
-  newPrint(2, 2020)
+  dayOne(2, 2020)
 
 }
 

@@ -1,5 +1,6 @@
 package com.day3
 
+import scala.annotation.tailrec
 import scala.io.Source
 
 object DayThree {
@@ -19,6 +20,7 @@ object DayThree {
 
   val slopeTemplate: List[String] = Source.fromResource("daythree.txt").getLines.toList
 
+  @tailrec
   def numberOfTrees(slope: List[String], movementVertical: Int = 1, movementHorizontal: Int = 1, slopeVertical: Int = 0, slopeHorizontal: Int = 0, treesHit: Int = 0): Int = {
 
     val testString = "..##.........##.........##.........##.........##.........##......."
@@ -39,6 +41,7 @@ object DayThree {
 
   }
 
+  @tailrec
   def totalNumberOfTrees(slope: List[String], movementList: List[(Int, Int)], slopesCalculated: Int = 0, total: Double = 1): Double = {
     slopesCalculated match {
       case _ if (slopesCalculated == movementList.size) => total

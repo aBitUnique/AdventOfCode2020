@@ -1,11 +1,13 @@
 package com.secretsanta
 
+import scala.annotation.tailrec
 import scala.util.Random
 
 object SecretSanta extends App {
 
-  val entrantList = List("Sofia", "Dom", "Elisa", "Katy", "Rach", "Joe", "Andrea", "Voula", "Abi", "Fae", "Fidelma", "Bryn", "Eve", "Charly", "Alex")
+  val entrantList = List("Name1", "Name2", "Name3", "Name4")
 
+  @tailrec
   def pullName(giftBuyers: List[String], giftReceivers: List[String], results: List[(String, String)] = List()): List[(String, String)] = {
 
     giftBuyers.size match {

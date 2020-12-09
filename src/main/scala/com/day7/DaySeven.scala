@@ -1,5 +1,6 @@
 package com.day7
 
+import scala.annotation.tailrec
 import scala.io.Source
 
 object DaySeven extends App {
@@ -29,6 +30,7 @@ object DaySeven extends App {
     else subBagsList.flatMap(x => bagMap.getOrElse(if (x(0).isDigit) x.tail else x, List("")))
   }
 
+  @tailrec
   def getAllSubBags(subBagsList: List[String], withValues: Boolean = false, currentResults: List[String] = List()): List[String] = {
     getSubBags(subBagsList, withValues) match {
       case List() => currentResults ++ subBagsList

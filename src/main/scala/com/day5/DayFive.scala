@@ -1,11 +1,13 @@
 package com.day5
 
+import scala.annotation.tailrec
 import scala.io.Source
 
 object DayFive extends App {
 
   val boardingPassData: List[String] = Source.fromResource("dayfive.txt").getLines.toList
 
+  @tailrec
   def getSeatNumber(binarySeatCode: String, rows: List[Int] = Range(0,128).toList, columns: List[Int] = Range(0,8).toList): (Int, Int) = {
 
     binarySeatCode.isEmpty match {
@@ -21,6 +23,7 @@ object DayFive extends App {
     }
   }
 
+  @tailrec
   def boardingPassSeatNumberTotals(binarySeatCodes: List[String], seatNumberTotals: List[Int] = List()): List[Int] = {
     binarySeatCodes.isEmpty match {
       case true => seatNumberTotals.sorted

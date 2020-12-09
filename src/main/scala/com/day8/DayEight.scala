@@ -1,5 +1,6 @@
 package com.day8
 
+import scala.annotation.tailrec
 import scala.io.Source
 
 object DayEight extends App {
@@ -8,6 +9,7 @@ object DayEight extends App {
 
   val instructionsList = videoGameInstructions.map(x => x.split(" ").toList)
 
+  @tailrec
   def instructionParser(instructionList: List[List[String]], instructionPosition: Int = 0, instructionsHit: List[Int] = List(), total: Int = 0): Unit = {
     instructionPosition match {
       case x if (instructionPosition <= (instructionList.size - 1)) =>
@@ -24,6 +26,7 @@ object DayEight extends App {
     }
   }
 
+  @tailrec
   def instructionSwitcher(instructionList: List[List[String]], instructionChanged: Int = 0): Unit = {
     instructionChanged match {
       case _ if (instructionChanged < instructionList.size) => {

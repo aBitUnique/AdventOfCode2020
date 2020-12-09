@@ -1,11 +1,13 @@
 package com.day6
 
+import scala.annotation.tailrec
 import scala.io.Source
 
 object DaySix extends App {
 
   val surveyResponseData: List[String] = Source.fromResource("daysix.txt").getLines.toList
 
+  @tailrec
   def concatLists(surveyResponse: List[String], intermediateResult: List[String] = List(), resultsList: List[List[String]] = List()): List[List[String]] = {
     surveyResponse.size match {
       case 0 => resultsList ++ List(intermediateResult)
