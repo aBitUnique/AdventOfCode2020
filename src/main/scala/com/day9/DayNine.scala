@@ -19,7 +19,7 @@ object DayNine extends App {
   def canBeSummedFromPrevious(listOfNumbers: List[BigDecimal], targetNumber: BigDecimal): Boolean = {
     listOfNumbers.size match {
       case 1 => false
-      case _ => listOfNumbers.tail.map(x => x + listOfNumbers.head).contains(targetNumber) match {
+      case _ => listOfNumbers.distinct.tail.map(x => x + listOfNumbers.head).contains(targetNumber) match {
         case true => true
         case false => canBeSummedFromPrevious(listOfNumbers.tail, targetNumber)
       }
@@ -35,6 +35,7 @@ object DayNine extends App {
         canBeSummedFromContiguous(listOfNumbers, targetNumber, currentStartPoint + 1)
       case x if x < targetNumber =>
         canBeSummedFromContiguous(listOfNumbers, targetNumber, currentStartPoint, sliceSize + 1)
+      case _ => canBeSummedFromContiguous(listOfNumbers, targetNumber, currentStartPoint + 1)
     }
   }
 
