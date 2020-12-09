@@ -29,10 +29,12 @@ object DayNine extends App {
   @tailrec
   def canBeSummedFromContiguous(listOfNumbers: List[BigDecimal], targetNumber: BigDecimal, currentStartPoint: Int = 0, sliceSize: Int = 2): BigDecimal = {
     listOfNumbers.slice(currentStartPoint, currentStartPoint + sliceSize).sum match {
-      case x if (x == targetNumber) =>
+      case x if (x == targetNumber) && (listOfNumbers.slice(currentStartPoint, currentStartPoint + sliceSize).distinct != 1) =>
         listOfNumbers.slice(currentStartPoint, currentStartPoint + sliceSize).max + listOfNumbers.slice(currentStartPoint, currentStartPoint + sliceSize).min
-      case x if x > targetNumber => canBeSummedFromContiguous(listOfNumbers, targetNumber, currentStartPoint + 1)
-      case x if x < targetNumber => canBeSummedFromContiguous(listOfNumbers, targetNumber, currentStartPoint, sliceSize + 1)
+      case x if x > targetNumber =>
+        canBeSummedFromContiguous(listOfNumbers, targetNumber, currentStartPoint + 1)
+      case x if x < targetNumber =>
+        canBeSummedFromContiguous(listOfNumbers, targetNumber, currentStartPoint, sliceSize + 1)
     }
   }
 
