@@ -45,5 +45,4 @@ object DayEight extends App {
   instructionParser(instructionsList)
   instructionSwitcher(instructionsList)
 
-
 }
