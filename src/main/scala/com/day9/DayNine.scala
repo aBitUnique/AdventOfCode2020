@@ -1,11 +1,13 @@
 package com.day9
 
+import scala.annotation.tailrec
 import scala.io.Source
 
 object DayNine extends App {
 
   val portOutputData: List[BigDecimal] = Source.fromResource("daynine.txt").getLines.toList.map(x => BigDecimal(x))
 
+  @tailrec
   def findWeakness(portOutput: List[BigDecimal], currentListEntry: Int = 25): BigDecimal = {
     canBeSummedFromPrevious(portOutput.slice((currentListEntry-25), currentListEntry.toInt), portOutput(currentListEntry.toInt)) match {
       case false => portOutput(currentListEntry.toInt)
@@ -13,6 +15,7 @@ object DayNine extends App {
     }
   }
 
+  @tailrec
   def canBeSummedFromPrevious(listOfNumbers: List[BigDecimal], targetNumber: BigDecimal): Boolean = {
     listOfNumbers.size match {
       case 1 => false
@@ -23,6 +26,7 @@ object DayNine extends App {
     }
   }
 
+  @tailrec
   def canBeSummedFromContiguous(listOfNumbers: List[BigDecimal], targetNumber: BigDecimal, currentStartPoint: Int = 0, sliceSize: Int = 2): BigDecimal = {
     listOfNumbers.slice(currentStartPoint, currentStartPoint + sliceSize).sum match {
       case x if (x == targetNumber) =>
