@@ -6,10 +6,10 @@ object DayNine extends App {
 
   val portOutputData: List[BigDecimal] = Source.fromResource("daynine.txt").getLines.toList.map(x => BigDecimal(x))
 
-  def findWeakness(currentListEntry: Int, portOutput: List[BigDecimal]): BigDecimal = {
+  def findWeakness(portOutput: List[BigDecimal], currentListEntry: Int = 25): BigDecimal = {
     canBeSummedFromPrevious(portOutput.slice((currentListEntry-25), currentListEntry.toInt), portOutput(currentListEntry.toInt)) match {
       case false => portOutput(currentListEntry.toInt)
-      case true => findWeakness(currentListEntry + 1, portOutput)
+      case true => findWeakness(portOutput, currentListEntry + 1)
     }
   }
 
@@ -32,8 +32,8 @@ object DayNine extends App {
     }
   }
 
-  println(findWeakness(25, portOutputData))
+  println(findWeakness(portOutputData))
 
-  println(canBeSummedFromContiguous(portOutputData, findWeakness(25, portOutputData)))
+  println(canBeSummedFromContiguous(portOutputData, findWeakness(portOutputData)))
 
 }
